@@ -1,12 +1,7 @@
-# [Name]
-## [Assignment #]
-## [Submission date: MM/DD/YY]
+# Adam Pannell
+## Assignment # 3
+## Submission date: 02/22/26
 ## Worked with/sources 
-* example
-* example
-* example
-* example
+* [Sort package documentation](https://pkg.go.dev/sort)
 ## Project Quirks/ Things that don't work
-* example
-* example
-* example
+Everything seems to work fine
