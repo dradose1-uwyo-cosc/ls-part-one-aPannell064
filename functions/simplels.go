@@ -27,7 +27,8 @@ func lsDir(w io.Writer, useColor bool, dir string) {
 			// Get file info
 			info, err := os.Lstat(filepath.Join(dir, name))
 			if err != nil {
-				fmt.Fprint(os.Stderr, err)
+				fmt.Fprintln(os.Stderr, "gols: cannot access '"+name+"': No such file or directory")
+				continue
 			}
 			mode := info.Mode()
 
@@ -60,7 +61,8 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		for _, arg := range args {
 			info, err := os.Lstat(arg)
 			if err != nil {
-				fmt.Fprint(os.Stderr, err)
+				fmt.Fprint(os.Stderr, "gols: cannot access '"+arg+"': No such file or directory")
+				continue
 			}
 			if info.IsDir() {
 				dirs = append(dirs, arg)
@@ -79,7 +81,8 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 				// Get file info
 				info, err := os.Lstat(file)
 				if err != nil {
-					fmt.Fprint(os.Stderr, err)
+					fmt.Fprintln(os.Stderr, "gols: cannot access '"+file+"': No such file or directory")
+					continue
 				}
 				mode := info.Mode()
 
