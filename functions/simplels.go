@@ -69,7 +69,7 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 			}
 		}
 
-		// Explicitely sort both sets of data (doesn't usually do anything)
+		// Explicitely sort both sets of data
 		sort.Strings(dirs)
 		sort.Strings(files)
 
