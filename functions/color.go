@@ -17,7 +17,7 @@ const (
 
 // Prints appropriate entries in color, or colorless if regular file
 func (c color) ColorPrint(w io.Writer, s string) {
-	_, err := w.Write([]byte(string(c) + s + "\n"))
+	_, err := w.Write([]byte(string(c) + s + string(Reset) + "\n"))
 	if err != nil {
 		fmt.Fprint(os.Stderr, err)
 	}

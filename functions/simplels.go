@@ -40,11 +40,17 @@ func lsDir(w io.Writer, useColor bool, dir string) {
 				Green.ColorPrint(w, name)
 			} else {
 				// Print anything else in default color
-				Reset.ColorPrint(w, name)
+				_, err := w.Write([]byte(name + "\n"))
+				if err != nil {
+					fmt.Fprint(os.Stderr, err)
+				}
 			}
 		} else {
-			// Print in default color not using colors
-			Reset.ColorPrint(w, name)
+			// Print in default color if not using colors
+			_, err := w.Write([]byte(name + "\n"))
+			if err != nil {
+				fmt.Fprint(os.Stderr, err)
+			}
 		}
 	}
 }
@@ -91,11 +97,17 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 					Green.ColorPrint(w, file)
 				} else {
 					// Print anything else in default color
-					Reset.ColorPrint(w, file)
+					_, err := w.Write([]byte(file + "\n"))
+					if err != nil {
+						fmt.Fprint(os.Stderr, err)
+					}
 				}
 			} else {
-				// Print in default color not using colors
-				Reset.ColorPrint(w, file)
+				// Print in default color if not using colors
+				_, err := w.Write([]byte(file + "\n"))
+				if err != nil {
+					fmt.Fprint(os.Stderr, err)
+				}
 			}
 
 		}
@@ -104,7 +116,15 @@ func SimpleLS(w io.Writer, args []string, useColor bool) {
 		for _, dir := range dirs {
 			if len(args) > 1 {
 				// Add a header in default color if there were multiple arguments
-				Reset.ColorPrint(w, "\n"+dir+": ")
+				/*
+					Please note that while the assignement asks for this if multiple 
+					directories are targets, Unix ls just does this if there are 
+					multiple targets. That is how it is implemented here. 
+				*/
+				_, err := w.Write([]byte("\n" + dir + ": \n"))
+				if err != nil {
+					fmt.Fprint(os.Stderr, err)
+				}
 			}
 			lsDir(w, useColor, dir)
 		}
